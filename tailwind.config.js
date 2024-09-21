@@ -11,7 +11,7 @@ export default {
       },
       colors: {
         sidebarBg: '#D7D9F3', // Custom sidebar background color
-        boxBg: '#F9F8FC', // Box background color
+        boxBg: '#F8F8FB', // Box background color
       },
     },
     fontSize: {
