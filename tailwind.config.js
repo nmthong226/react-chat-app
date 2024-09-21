@@ -1,9 +1,31 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ["./src/**/*.{html,js}"],
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+  ],
   theme: {
-    extend: {},
+    extend: {
+      screens: {
+        "xsm": "425px",
+      },
+      colors: {
+        sidebarBg: '#D7D9F3', // Custom sidebar background color
+        boxBg: '#F9F8FC', // Box background color
+      },
+    },
+    fontSize: {
+      'xsm': '0.75rem',
+      'sm': '0.8rem',
+      'md': '0.9rem',
+      'base': '0.95rem',
+      'lg': '1.125rem',
+      'xl': '1.25rem',
+      '2xl': '1.563rem',
+      '3xl': '1.953rem',
+      '4xl': '2.25rem',
+      '5xl': '2.5rem',
+    }
   },
   plugins: [],
 }
-
