@@ -1,32 +1,8 @@
 import { faMagnifyingGlass, faPaperclip } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import userImg from '/user-avatar.png';
 import { faFaceSmileBeam, faPaperPlane } from "@fortawesome/free-regular-svg-icons";
 import { useState } from "react";
-
-const userList = [
-  {
-    avatar: userImg, name: 'Rohit', lastMessage: 'Hello', lastMessageTime: '21 Sep', unreadedMessages: 5
-  },
-  {
-    avatar: userImg, name: 'Iftikhar Shaikh', lastMessage: 'early prototype of product', lastMessageTime: '31 Mar', unreadedMessages: 1
-  },
-  {
-    avatar: userImg, name: 'Victor Erixon', lastMessage: 'New project of you', lastMessageTime: '02 Feb', unreadedMessages: 3
-  },
-  {
-    avatar: userImg, name: 'Hali', lastMessage: 'Welcome', lastMessageTime: '31 Jan', unreadedMessages: 0
-  },
-  {
-    avatar: userImg, name: 'Jony Ive', lastMessage: 'Hey', lastMessageTime: '12 Dec', unreadedMessages: 0
-  },
-  {
-    avatar: userImg, name: 'Jony Ive', lastMessage: 'Hey', lastMessageTime: '12 Dec', unreadedMessages: 0
-  },
-  {
-    avatar: userImg, name: 'Jony Ive', lastMessage: 'Hey', lastMessageTime: '12 Dec', unreadedMessages: 0
-  },
-]
+import { userList } from "../assets/constant";
 
 const ChatBox = () => {
   const [messageInput, setMessageInput] = useState("");
