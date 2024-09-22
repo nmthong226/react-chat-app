@@ -1,10 +1,10 @@
 import Layout from './layout/layout'
-import ChatBox from './components/ChatBox'
+import ChatPage from './pages/ChatPage'
 
 function App() {
   return (
     <Layout>
-      <ChatBox />
+      <ChatPage />
     </Layout>
   )
 }
