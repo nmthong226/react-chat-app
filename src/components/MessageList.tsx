@@ -32,7 +32,6 @@ const MessageList: FC<MessageListProps> = ({
           onChange={(e) => setSearchQuery(e.target.value)}
         />
       </div>
-
       {/* User List */}
       <div className="w-full h-[70vh] mt-4 px-2 space-y-3 overflow-y-auto pb-2">
         {filteredChatList.length > 0 || !user ? (
@@ -56,7 +55,14 @@ const MessageList: FC<MessageListProps> = ({
                 </div>
                 <div className="flex flex-col ml-4 max-w-[80%] leading-tight max-smd:hidden">
                   <h1 className="text-md font-semibold line-clamp-1">{chat.otherUser.name}</h1>
-                  <span className="text-gray-500 line-clamp-1 text-md">{chat.chatHistory[0].content}</span>
+                  {/* Get the last message from the array chat list of user */}
+                  {chat.chatHistory.length > 0 && (
+                    <span className="text-gray-500 line-clamp-1 text-md">
+                      {chat.chatHistory[chat.chatHistory.length - 1].senderId === user?.id
+                        ? `You: ${chat.chatHistory[chat.chatHistory.length - 1].content}`
+                        : chat.chatHistory[chat.chatHistory.length - 1].content}
+                    </span>
+                  )}
                 </div>
               </div>
               <div className="flex flex-col items-end">
