@@ -60,8 +60,8 @@ To run this project locally, follow these steps:
 
 1. Clone the repository:
    ```bash
-   git clone [Your GitHub Repo URL]
-   cd [Your Project Directory]
+   git clone [This GitHub Repo URL]
+   ```
 2. Install dependencies:
     ```bash
     npm install
