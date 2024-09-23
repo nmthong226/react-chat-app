@@ -39,7 +39,6 @@ function App() {
             )
           }
         />
-
         {/* Protected Chat Route */}
         <Route
           path="/chat"
@@ -53,7 +52,6 @@ function App() {
             )
           }
         />
-
         {/* Default Route */}
         <Route path="*" element={<Navigate to={authenticated ? "/chat" : "/login"} />} />
       </Routes>
