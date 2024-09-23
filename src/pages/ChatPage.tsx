@@ -1,9 +1,7 @@
 import { FC } from "react";
-import { faMagnifyingGlass, faPaperclip } from "@fortawesome/free-solid-svg-icons"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faFaceSmileBeam, faPaperPlane } from "@fortawesome/free-regular-svg-icons";
 import { useEffect, useRef, useState } from "react";
-import EmojiPicker from "emoji-picker-react";
+import MessageInput from "../components/MessageInput";
+import MessageList from "../components/MessageList";
 
 type ChatPageProps = {
   user: User | null;
@@ -15,7 +13,6 @@ const ChatPage: FC<ChatPageProps> = ({ user }) => {
   const [selectedChat, setSelectedChat] = useState<ChatList | null>(null);
   const [newMessage, setNewMessage] = useState<string>('');
   const [open, setOpen] = useState(false);
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [searchQuery, setSearchQuery] = useState(''); // State to track search input
 
   // Filter chatList based on the search query (case-insensitive)
@@ -94,85 +91,19 @@ const ChatPage: FC<ChatPageProps> = ({ user }) => {
     setSelectedChat(chat);
   };
 
-  // Handler to set window width when window resizes
-  const handleResize = () => {
-    setWindowWidth(window.innerWidth);
-  };
-
-  // Update window size on resize
-  useEffect(() => {
-    window.addEventListener('resize', handleResize);
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
-
-  // Conditionally set the width and height of EmojiPicker based on window width
-  const getEmojiPickerSize = () => {
-    if (windowWidth <= 600) {
-      return { width: 200, height: 450 };
-    } else {
-      return { width: 350, height: 450 };
-    }
-  };
-  const { width, height } = getEmojiPickerSize();
-
   return (
     <div className="flex flex-col w-full h-full">
       <h1 className="text-2xl font-semibold">Chat</h1>
       <div className="flex flex-row w-full h-full mt-4 sm:mt-8">
-        <div className="flex flex-col w-1/4 xsm:w-1/3 h-full">
-          {/* Search Bar */}
-          <div className="flex flex-row w-full relative items-center text-md">
-            <FontAwesomeIcon icon={faMagnifyingGlass} className="absolute left-0 xsm:left-2 text-gray-400" />
-            <input
-              className="w-full bg-transparent border-b-[1px] pl-6 xsm:pl-10 h-14 border-slate-300 outline-none"
-              placeholder="Search"
-              aria-label="Search"
-              value={searchQuery} // Bind search query to input
-              onChange={(e) => setSearchQuery(e.target.value)} // Update search query on input change
-            />
-          </div>
-
-          {/* User List */}
-          <div className="w-full h-[70vh] mt-4 px-2 space-y-3 overflow-y-auto pb-2">
-            {filteredChatList.length > 0 || !user ? (
-              filteredChatList.map((chat, index) => (
-                <div
-                  className="flex w-full h-20 bg-white hover:bg-gray-100 hover:cursor-pointer rounded-lg items-center justify-center xsm:justify-between px-2 lg:px-6 shadow-md"
-                  key={index}
-                  onClick={() => handleChatSelect(chat)}
-                >
-                  <div className="flex items-center">
-                    <div className="flex relative shrink-0">
-                      <img
-                        src={chat.otherUser.avatar}
-                        alt={`${chat.otherUser.name}'s avatar`}
-                        className="w-10 h-10 rounded-full"
-                      />
-                      {chat.otherUser.isOnline && <div className="absolute top-0 right-0 size-[10px] rounded-full border-2 border-white bg-green-500" />}
-                      <div className={`flex absolute bottom-0 right-0 size-4 smd:size-5 rounded-full bg-red-500 text-white items-center justify-center text-xsm smd:text-sm xsm:hidden ${chat.otherUser.unreadedMessages === 0 ? 'invisible' : ''}`}>
-                        {chat.otherUser.unreadedMessages}
-                      </div>
-                    </div>
-                    <div className="flex flex-col ml-4 max-w-[80%] leading-tight max-smd:hidden">
-                      <h1 className="text-md font-semibold line-clamp-1">{chat.otherUser.name}</h1>
-                      <span className="text-gray-500 line-clamp-1 text-md">{chat.chatHistory[0].content}</span>
-                    </div>
-                  </div>
-                  <div className="flex flex-col items-end">
-                    <span className="text-xsm smd:text-sm text-gray-500 text-nowrap max-xsm:hidden">{chat?.chatHistory[0]?.timestamp.toLocaleDateString('en-US', { day: '2-digit', month: 'short' })}</span>
-                    <div className={`flex size-4 smd:size-5 rounded-full bg-red-500 text-white items-center justify-center text-xsm smd:text-sm max-xsm:hidden ${chat.otherUser.unreadedMessages === 0 ? 'invisible' : ''}`}>
-                      {chat.otherUser.unreadedMessages}
-                    </div>
-                  </div>
-                </div>
-              ))
-            ) : (
-              <div className="text-center text-gray-500">No users found</div>
-            )}
-          </div>
-        </div>
+        {/* User List */}
+        <MessageList
+          filteredChatList={filteredChatList}
+          handleChatSelect={handleChatSelect}
+          searchQuery={searchQuery}
+          setSearchQuery={setSearchQuery}
+          selectedChat={selectedChat}
+          user={user}
+        />
         <div className="flex flex-col w-2/3 h-full mx-2 sm:mx-6 relative">
           {/* User Status Bar */}
           <div className="flex flex-col w-full relative text-md h-14 border-b-[1px] border-slate-300 outline-none">
@@ -222,47 +153,14 @@ const ChatPage: FC<ChatPageProps> = ({ user }) => {
             )}
           </div>
           {/* Message Input */}
-          <div className="flex flex-row items-center w-full min-h-[10vh] max-h-[15vh] mt-2 bg-white rounded-lg border-[1px] text-base absolute bottom-2 left-0 right-0">
-            {/* Emoji Button and Picker */}
-            <div className="relative ml-4">
-              <FontAwesomeIcon
-                icon={faFaceSmileBeam}
-                className={`size-4 sm:size-8 hover:cursor-pointer relative ${open ? 'text-blue-600' : 'text-gray-400'}`}
-                onClick={() => setOpen(!open)}
-              />
-              {/* Emoji Picker */}
-              <div className="absolute bottom-full mb-6 z-50">
-                <EmojiPicker open={open} onEmojiClick={handleEmoji} width={width} height={height} />
-              </div>
-            </div>
-            {/* Text area for typing message */}
-            <textarea
-              rows={1}
-              className="flex w-[60%] sm:w-[80%] bg-transparent min-h-[10vh] max-h-[15vh] pl-2 sm:pl-6 py-6 text-sm sm:text-base border-slate-300 outline-none resize-none overflow-y-auto"
-              placeholder="Type a message..."
-              value={newMessage}
-              aria-label="Chat"
-              onChange={(e) => {
-                setNewMessage(e.target.value);
-                e.target.style.height = "auto";
-                e.target.style.height = `${e.target.scrollHeight}px`;
-              }}
-            />
-            {/* Attachment and send message */}
-            <FontAwesomeIcon
-              icon={faPaperclip}
-              className="absolute right-16 bottom-7 text-gray-400 size-4 hover:cursor-pointer"
-            />
-            <button
-              className="absolute size-8 right-4 bottom-5 justify-center items-center rounded-full bg-gradient-to-b from-blue-400 to-blue-600 hover:opacity-90 text-white"
-              onClick={sendMessage}
-            >
-              <FontAwesomeIcon
-                icon={faPaperPlane}
-                className="text-white size-4"
-              />
-            </button>
-          </div>
+          <MessageInput
+            newMessage={newMessage}
+            setNewMessage={setNewMessage}
+            sendMessage={sendMessage}
+            open={open}
+            setOpen={setOpen}
+            handleEmoji={handleEmoji}
+          />
         </div>
       </div>
     </div >
