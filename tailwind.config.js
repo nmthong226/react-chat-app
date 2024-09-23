@@ -8,6 +8,11 @@ export default {
     extend: {
       screens: {
         "xsm": "425px",
+        "sm": "600px",
+        "smd": "700px",
+        "lg": "1024px",
+        "xlg": "1280px",
+        "xl": "1440px",
       },
       colors: {
         sidebarBg: '#D7D9F3', // Custom sidebar background color
@@ -15,7 +20,7 @@ export default {
       },
     },
     fontSize: {
-      'xsm': '0.75rem',
+      'xsm': '0.7rem',
       'sm': '0.8rem',
       'md': '0.9rem',
       'base': '0.95rem',
