@@ -5,9 +5,10 @@ import { faBars, faCalendar, faFileLines, faGear, faHome, faMessage, faTag } fro
 
 type SideBarProps = {
   user: User | null;  // Accept user data as prop
+  setAuthenticated: (value: boolean, user: User | null) => void
 };
 
-const SideBar: FC<SideBarProps> = ({ user }) => {
+const SideBar: FC<SideBarProps> = ({ user, setAuthenticated }) => {
   const [open, setOpen] = useState(false);
   const { name, avatar } = user || {};
   const navItems = [
@@ -32,7 +33,7 @@ const SideBar: FC<SideBarProps> = ({ user }) => {
       <aside className={`flex flex-col max-sm:absolute w-16 lg:w-52 xlg:w-64 min-h-screen bg-sidebarBg transform ${open ? 'translate-x-0 w-52' : '-translate-x-full'} transition-transform duration-300 sm:translate-x-0 z-50`}>
         {/* User Avatar */}
         {user ? (
-          <UserAvatar className="mt-6 items-center" userName={name} userAvatar={avatar} openSideBar={open} />
+          <UserAvatar className="mt-6 items-center" userName={name} userAvatar={avatar} openSideBar={open} setAuthenticated={setAuthenticated}/>
         ) : (
           <div aria-label="Loading..." role="status" className="flex flex-col items-center justify-center space-y-4 mt-6">
             <div className="flex w-20 h-20 rounded-full bg-gray-50 animate-pulse items-center justify-center">
