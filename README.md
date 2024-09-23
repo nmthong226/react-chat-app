@@ -1,50 +1,77 @@
-# React + TypeScript + Vite
+# Frontend Chat Web Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 1. Objective
+The objective of this project is to develop a frontend chat web application that allows users to communicate in real-time. The application meets the requirements outlined by Nexlab Technology Co., Ltd for the frontend test.
 
-Currently, two official plugins are available:
+## 2. Technologies Used
+- **Framework:** React 16+
+- **Build Tool:** Vite
+- **Language:** TypeScript
+- **State Management:** React Hooks
+- **Styling:** Tailwind CSS
+- **Icons:** FontAwesome
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 3. Requirements
 
-## Expanding the ESLint configuration
+### 3.1 Functional Requirements
+- Users can send messages in real-time.
+- Messages are cached locally to maintain state during user sessions.
+- A search feature allows users to filter chat lists based on usernames.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+### 3.2 Non-Functional Requirements
+- The application should have a responsive design.
+- Code must be well-organized and adhere to best practices.
+- The project should be deployed and accessible online.
 
-- Configure the top-level `parserOptions` property like this:
+## 4. Implementation
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+### 4.1 Project Structure
+The project is organized into the following directories:
+```bash
+src/ 
+├── components/ # Contains reusable UI components. 
+├── pages/ # Contains main application pages (e.g., Login, Chat). 
+├── assets/ # Contains static assets like images and constants. 
+├── hooks/ # Contains custom hooks for state management. 
+└── App.tsx # The main application file.
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+### 4.2 Core Features
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+#### 4.2.1 Chat Functionality
+- **Sending Messages:** Users can type messages and send them. Each message is timestamped and displayed in the chat history.
+- **Message Caching:** Messages are saved in local storage to maintain state across page reloads.
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+#### 4.2.2 User Authentication
+- A simple login system with hardcoded credentials.
+- User data is stored in local storage to manage session states.
+
+#### 4.2.3 Search Functionality
+- Users can search for chats using a search bar that filters chat lists dynamically.
+
+### 4.3 UI Design
+The application follows a clean and modern design, utilizing Tailwind CSS for styling and FontAwesome for icons. Components are structured for easy readability and maintainability.
+
+## 5. Deployment
+The application is deployed on [Your Deployment Platform, e.g., Vercel, Netlify]. Users can access it at [Your App URL].
+
+## 6. Getting Started
+To run this project locally, follow these steps:
+
+### 1. Clone the repository:
+```bash
+git clone [This GitHub Repo URL]
 ```
+### 2. Install dependencies:
+```bash
+npm install
+```
+### 3. Start the development server:
+```bash
+npm run dev
+```
+### 4. Open your browser and navigate to http://localhost:3000.
+
+
+## 7. Acknowledgments
+Thank you to Nexlab Technology Co., Ltd for providing the opportunity to work on this project.
