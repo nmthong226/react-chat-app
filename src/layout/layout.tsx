@@ -12,11 +12,11 @@ const Layout: FC<TProps> = ({ children, user }) => {
     return (
         <div className="flex flex-row bg-boxBg dark:bg-zinc-900 min-h-screen">
             {/* Sidebar */}
-            <SideBar user={user}/>
+            <SideBar user={user} />
             {/* Main Content */}
-            <div className={clsx("flex flex-col min-h-full container w-full flex-1 py-8 px-20")}>
+            <div className={clsx("flex flex-col min-h-full flex-grow w-full px-2 sm:px-6 py-4 xsm:py-8 xlg:px-20 mx-auto")}>
                 <Header />
-                <main className="flex-1">
+                <main className="flex-1 w-full">
                     {children || <p>No content available.</p>}
                 </main>
             </div>
