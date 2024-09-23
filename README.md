@@ -58,19 +58,19 @@ The application is deployed on [Your Deployment Platform, e.g., Vercel, Netlify]
 ## 6. Getting Started
 To run this project locally, follow these steps:
 
-1. Clone the repository:
+### 1. Clone the repository:
    ```bash
    git clone [This GitHub Repo URL]
    ```
-2. Install dependencies:
+### 2. Install dependencies:
     ```bash
     npm install
     ```
-3. Start the development server:
+### 3. Start the development server:
 ```bash
 npm run dev
 ```
-4. Open your browser and navigate to http://localhost:3000.
+### 4. Open your browser and navigate to http://localhost:3000.
 
 
 ## 7. Acknowledgments
