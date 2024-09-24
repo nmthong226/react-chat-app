@@ -2,6 +2,7 @@ import { FC } from "react";
 import { useEffect, useRef, useState } from "react";
 import MessageInput from "../components/MessageInput";
 import MessageList from "../components/MessageList";
+import { isSingleEmoji } from "../utils/checkSingleEmoji";
 
 type ChatPageProps = {
   user: User | null;
@@ -138,11 +139,17 @@ const ChatPage: FC<ChatPageProps> = ({ user }) => {
                     // User message (right side)
                     <div className="flex w-full justify-end items-start">
                       <div className="flex flex-col max-w-xs items-end">
-                        <div className="bg-blue-600 px-6 py-3 rounded-3xl">
-                          <span className="text-white text-md break-words">
+                        {isSingleEmoji(message.content) ? (
+                          <div className="text-5xl">
                             {message.content}
-                          </span>
-                        </div>
+                          </div>
+                        ) : (
+                          <div className="bg-blue-600 px-6 py-3 rounded-3xl">
+                            <span className="text-white text-md break-words">
+                              {message.content}
+                            </span>
+                          </div>
+                        )}
                       </div>
                     </div>
                   )}
