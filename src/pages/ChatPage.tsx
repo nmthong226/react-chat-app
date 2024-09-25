@@ -120,7 +120,7 @@ const ChatPage: FC<ChatPageProps> = ({ user }) => {
                     // Guest message (left side)
                     <>
                       <div className="flex flex-col max-w-xs items-start">
-                        <div className="flex flex-row relative items-center">
+                        <div className="flex flex-row relative items-center group">
                           <img
                             src={selectedChat.otherUser.avatar}
                             alt={`${selectedChat.otherUser.name}'s avatar`}
@@ -131,8 +131,8 @@ const ChatPage: FC<ChatPageProps> = ({ user }) => {
                               {message.content}
                             </span>
                           </div>
-                          {/* Absolute div positioned to the right */}
-                          <div className="flex flex-row absolute right-[-90px] bg-gray-300 rounded-xl p-5 h-8 w-20 items-center justify-center">
+                          {/* Absolute div positioned to the right - hidden by default, shown on hover */}
+                          <div className="flex-row absolute right-[-90px] bg-gray-300 rounded-xl p-5 h-8 w-20 items-center justify-center hidden group-hover:flex">
                             {/* Content of the absolute div */}
                           </div>
                         </div>
