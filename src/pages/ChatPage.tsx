@@ -118,23 +118,29 @@ const ChatPage: FC<ChatPageProps> = ({ user }) => {
                 <div key={index} className="flex w-full mb-4 items-start">
                   {message.senderId !== user?.id ? (
                     // Guest message (left side)
-                    <div className="flex flex-col max-w-xs items-start">
-                      <div className="flex flex-row">
-                        <img
-                          src={selectedChat.otherUser.avatar}
-                          alt={`${selectedChat.otherUser.name}'s avatar`}
-                          className="w-10 h-10 rounded-full mr-3"
-                        />
-                        <div className="bg-slate-200 p-3 rounded-3xl">
-                          <span className="text-gray-700 text-md break-words">
-                            {message.content}
-                          </span>
+                    <>
+                      <div className="flex flex-col max-w-xs items-start">
+                        <div className="flex flex-row relative items-center">
+                          <img
+                            src={selectedChat.otherUser.avatar}
+                            alt={`${selectedChat.otherUser.name}'s avatar`}
+                            className="w-10 h-10 rounded-full mr-3"
+                          />
+                          <div className="bg-slate-200 p-3 rounded-3xl">
+                            <span className="text-gray-700 text-md break-words">
+                              {message.content}
+                            </span>
+                          </div>
+                          {/* Absolute div positioned to the right */}
+                          <div className="flex flex-row absolute right-[-90px] bg-gray-300 rounded-xl p-5 h-8 w-20 items-center justify-center">
+                            {/* Content of the absolute div */}
+                          </div>
                         </div>
+                        <span className="text-sm text-gray-500">
+                          {new Date(message.timestamp).toLocaleTimeString("en-US", { hour: '2-digit', minute: '2-digit', hour12: false })}
+                        </span>
                       </div>
-                      <span className="text-sm text-gray-500">
-                        {new Date(message.timestamp).toLocaleTimeString("en-US", { hour: '2-digit', minute: '2-digit' })}
-                      </span>
-                    </div>
+                    </>
                   ) : (
                     // User message (right side)
                     <div className="flex w-full justify-end items-start">
