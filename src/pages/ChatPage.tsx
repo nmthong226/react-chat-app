@@ -131,10 +131,9 @@ const ChatPage: FC<ChatPageProps> = ({ user }) => {
                               {message.content}
                             </span>
                           </div>
-                          {/* Absolute div positioned to the right - hidden by default, shown on hover */}
+                          {/* Absolute div positioned to the right - hidden by default, shown on hover
                           <div className="flex-row absolute right-[-90px] bg-gray-300 rounded-xl p-5 h-8 w-20 items-center justify-center hidden group-hover:flex">
-                            {/* Content of the absolute div */}
-                          </div>
+                          </div> */}
                         </div>
                         <span className="text-sm text-gray-500">
                           {new Date(message.timestamp).toLocaleTimeString("en-US", { hour: '2-digit', minute: '2-digit', hour12: false })}
